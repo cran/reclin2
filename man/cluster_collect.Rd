@@ -23,6 +23,9 @@ object can be used as a regular (non-cluster) set of pairs
 Collect pairs from cluster nodes
 }
 \examples{
+# We don't test this example on CRAN as it generates issues with the 
+# runtime.
+\donttest{
 library(parallel)
 data("linkexample1", "linkexample2")
 cl <- makeCluster(2)
@@ -39,4 +42,5 @@ select_threshold(pairs, "selected", "mpost", 0.5)
 local_pairs <- cluster_collect(pairs, "selected")
 
 stopCluster(cl)
+}
 }

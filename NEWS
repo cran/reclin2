@@ -1,10 +1,61 @@
 
+
+CHANGES IN VERSION 0.3.2
+
+
+NEW FEATURES
+
+  - The `select_unique` function has been added. This function filters pairs and
+    removes pairs that have been matched more than once. For pairs that are
+    matched more than once (with a high enough link quality) it is not possible
+    to decide which link is the correct one. In some linkage scenarios (with a
+    focus on reducing false matches) it is then preferable to remove both. 
+
+  - The `score_simple` function has been added which calculates a weighted sum
+    of the comparison vectors. Different weights are allowed for agreement, 
+    non-agreement and missing values for each of the variables in the comparison
+    vector.
+
+  - The `merge_pairs` function can combine different sets of pairs for the same
+    two data sets. For example, combine two sets of pairs generated with
+    different blocking variables.
+
+  - The functions `identical`, `jaro_winkler`, `lcs` and `jaccard` are
+    deprecated and will be removed in future versions of the package. Instead
+    use the functions `cmp_identical`, `cmp_jarowinkler`, `cmp_lcs` and
+    `cmp_jaccard`. The function `identical` caused a conflict with a function in
+    base R. Also this, hopefully, stresses that these functions return a
+    function.
+
+  - `select_greedy` has `n` and `m` arguments that allow the user to specify
+    what type of linkage is allows (1-to-1, n-to-1, 1-to-m, n-to-m).
+
+  - `select_greedy` has an `include_ties` option that will include multiple pairs
+    for a record when these pairs have an equal weight/score.
+
+  - `pair_minsim` and `cluster_pair_minsim` now have an `on_blocking` option
+    that functions similar to the `on` argument of `pair_blocking`: pairs are
+    only generated when the agree exactly on the blocking keys. 
+
+  - When selecting pairs using a threshold. Pairs are now selected when their
+    score is above or *equal to* the threshold. This has an effect for all of 
+    the `select_` functions.
+
+BUG FIXES
+
+  - `select_greedy` gave an error when the set of pairs is empty. 
+
+  - The `by_x` and `by_y` arguments were not handled correctly. Fixed.
+
+  - The result from `cluster_collect` can now be used without introducing 
+    a warning from `data.table`.
+
 CHANGES IN VERSION 0.2.0
 
 NEW FEATURES:
 
-  - `merge_pairs` combines two sets of pairs into one (like `rbind`). Expecially 
-    usefull in combination with `pair_blocking` to generate pairs that are blocked
+  - `merge_pairs` combines two sets of pairs into one (like `rbind`). Especially 
+    useful in combination with `pair_blocking` to generate pairs that are blocked
     on multiple keys (e.g. they have match on either `postcode` or `lastname`).
 
 BUG FIXES:

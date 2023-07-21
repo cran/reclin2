@@ -21,7 +21,7 @@ print(pairs)
 
 # <unlabeled code block>
 compare_pairs(pairs, on = c("lastname", "firstname", "address", "sex"),
-  default_comparator = jaro_winkler(0.9), inplace = TRUE)
+  default_comparator = cmp_jarowinkler(0.9), inplace = TRUE)
 print(pairs)
 
 # <unlabeled code block>
@@ -31,6 +31,16 @@ print(m)
 # <unlabeled code block>
 pairs <- predict(m, pairs = pairs, add = TRUE)
 print(pairs)
+
+# <unlabeled code block>
+pairs <- score_simple(pairs, "score", 
+  on = c("lastname", "firstname", "address", "sex"))
+
+# <unlabeled code block>
+pairs <- score_simple(pairs, "score", 
+  on = c("lastname", "firstname", "address", "sex"), 
+  w1 = c(lastname = 2, firstname = 2, address = 1, sex = 0.5),
+  w0 = -1, wna = 0)
 
 # <unlabeled code block>
 pairs <- select_threshold(pairs, "threshold", score = "weights", threshold = 8)

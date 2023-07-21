@@ -44,6 +44,7 @@ can then be further processes using functions such as
 library(parallel)
 data("linkexample1", "linkexample2")
 cl <- makeCluster(2)
+\dontshow{clusterEvalQ(cl, data.table::setDTthreads(1))}
 pairs <- cluster_pair(cl, linkexample1, linkexample2)
 stopCluster(cl)
 

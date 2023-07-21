@@ -10,8 +10,9 @@ cluster_pair_minsim(
   y,
   on,
   minsim = 0,
+  on_blocking = character(0),
   comparators = list(default_comparator),
-  default_comparator = identical(),
+  default_comparator = cmp_identical(),
   keep_simsum = TRUE,
   deduplication = FALSE,
   name = "default"
@@ -19,7 +20,7 @@ cluster_pair_minsim(
 }
 \arguments{
 \item{cluster}{a cluster object as created by \code{\link[parallel]{makeCluster}}
-from \code{parallel} or \code{\link[snow]{makeCluster}} from \code{snow}.}
+from \code{parallel} or \code{makeCluster} from \code{snow}.}
 
 \item{x}{first \code{data.frame}}
 
@@ -29,6 +30,8 @@ from \code{parallel} or \code{\link[snow]{makeCluster}} from \code{snow}.}
 all pairs of \code{x} and \code{y} will be generated.}
 
 \item{minsim}{minimal similarity score.}
+
+\item{on_blocking}{variables for which the pairs have to match.}
 
 \item{comparators}{named list of functions with which the variables are compared. 
 This function should accept two vectors. Function should either return a vector
@@ -75,6 +78,7 @@ can then be further processes using functions such as
 library(parallel)
 data("linkexample1", "linkexample2")
 cl <- makeCluster(2)
+\dontshow{clusterEvalQ(cl, data.table::setDTthreads(1))}
 # Either address or postcode has to match to keep a pair
 pairs <- cluster_pair_minsim(cl, linkexample1, linkexample2, 
    on = c("postcode", "address"), minsim = 1)

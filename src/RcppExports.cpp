@@ -24,21 +24,39 @@ BEGIN_RCPP
 END_RCPP
 }
 // greedy_rcpp
-LogicalVector greedy_rcpp(IntegerVector x, IntegerVector y);
-RcppExport SEXP _reclin2_greedy_rcpp(SEXP xSEXP, SEXP ySEXP) {
+LogicalVector greedy_rcpp(IntegerVector x, IntegerVector y, NumericVector w, bool include_ties);
+RcppExport SEXP _reclin2_greedy_rcpp(SEXP xSEXP, SEXP ySEXP, SEXP wSEXP, SEXP include_tiesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< IntegerVector >::type x(xSEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type y(ySEXP);
-    rcpp_result_gen = Rcpp::wrap(greedy_rcpp(x, y));
+    Rcpp::traits::input_parameter< NumericVector >::type w(wSEXP);
+    Rcpp::traits::input_parameter< bool >::type include_ties(include_tiesSEXP);
+    rcpp_result_gen = Rcpp::wrap(greedy_rcpp(x, y, w, include_ties));
+    return rcpp_result_gen;
+END_RCPP
+}
+// greedy_nm_rcpp
+LogicalVector greedy_nm_rcpp(IntegerVector x, IntegerVector y, NumericVector w, int n, int m);
+RcppExport SEXP _reclin2_greedy_nm_rcpp(SEXP xSEXP, SEXP ySEXP, SEXP wSEXP, SEXP nSEXP, SEXP mSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type y(ySEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type w(wSEXP);
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< int >::type m(mSEXP);
+    rcpp_result_gen = Rcpp::wrap(greedy_nm_rcpp(x, y, w, n, m));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
     {"_reclin2_equivalence_rcpp", (DL_FUNC) &_reclin2_equivalence_rcpp, 3},
-    {"_reclin2_greedy_rcpp", (DL_FUNC) &_reclin2_greedy_rcpp, 2},
+    {"_reclin2_greedy_rcpp", (DL_FUNC) &_reclin2_greedy_rcpp, 4},
+    {"_reclin2_greedy_nm_rcpp", (DL_FUNC) &_reclin2_greedy_nm_rcpp, 5},
     {NULL, NULL, 0}
 };
 

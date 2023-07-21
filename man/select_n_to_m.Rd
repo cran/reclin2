@@ -54,6 +54,9 @@ select_greedy(
   x = attr(pairs, "x"),
   y = attr(pairs, "y"),
   inplace = FALSE,
+  include_ties = FALSE,
+  n = 1L,
+  m = 1L,
   ...
 )
 
@@ -100,12 +103,12 @@ rows, or the name of such a variable in \code{pairs}. Pairs are only
 selected when \code{preselect} is \code{TRUE}. This interacts with 
 \code{threshold} (pairs have to be selected with both conditions).}
 
-\item{id_x}{a integer vector with the same length a the number of rows in 
+\item{id_x}{a integer vector with the same length as the number of rows in 
 \code{pairs}, or the name of a column in \code{x}. This vector should 
 identify unique objects in \code{x}. When not specified it is assumed that
 each element in \code{x} is unique.}
 
-\item{id_y}{a integer vector with the same length a the number of rows in 
+\item{id_y}{a integer vector with the same length as the number of rows in 
 \code{pairs}, or the name of a column in \code{y}. This vector should 
 identify unique objects in \code{y}. When not specified it is assumed that
 each element in \code{y} is unique.}
@@ -118,10 +121,19 @@ each element in \code{y} is unique.}
 
 \item{inplace}{logical indicating whether \code{pairs} should be modified in place. When
 pairs is large this can be more efficient.}
+
+\item{include_ties}{when pairs for a given record have an equal weight, should
+all pairs be included.}
+
+\item{n}{an integer. Each element of x can be linked to at most n elements of
+y.}
+
+\item{m}{an integer. Each element of y can be linked to at most m elements of
+x.}
 }
 \value{
 Returns the \code{pairs} with the variable given by \code{variable} added. This
-is a logical variable indicating which pairs are selected a matches.
+is a logical variable indicating which pairs are selected as matches.
 }
 \description{
 Select matching pairs enforcing one-to-one linkage
@@ -132,7 +144,10 @@ algorithm that selects the first pair with the highest weight.
 \code{select_n_to_m} tries to optimise the total weight of all of the 
 selected pairs. In general this will result in a better selection. However,
 \code{select_n_to_m} uses much more memory and is much slower and, therefore,
-can only be used when the number of possible pairs is not too large.
+can only be used when the number of possible pairs is not too large. 
+
+Note that when \code{include_ties = TRUE} the same record can still be 
+selected more than once. In that case the pairs will have an equal weight.
 }
 \examples{
 data("linkexample1", "linkexample2")
@@ -147,6 +162,9 @@ pairs <- select_greedy(pairs, "greedy", "mpost", 0.5)
 table(pairs$ntom, pairs$greedy)
 
 # The same example as above using a cluster;
+# We don't test this example on CRAN as it generates issues with the 
+# runtime.
+\donttest{
 library(parallel)
 cl <- makeCluster(2)
 pairs <- cluster_pair_blocking(cl, linkexample1, linkexample2, "postcode")
@@ -161,7 +179,7 @@ local_pairs <- cluster_collect(pairs, "selected")
 local_pairs <- select_n_to_m(local_pairs, "ntom", "mpost", 0.5)
 local_pairs <- select_greedy(local_pairs, "greedy", "mpost", 0.5)
 table(local_pairs$ntom, local_pairs$greedy)
-
 stopCluster(cl)
+}
 
 }

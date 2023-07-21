@@ -9,8 +9,9 @@ pair_minsim(
   y,
   on,
   minsim = 0,
+  on_blocking = character(0),
   comparators = list(default_comparator),
-  default_comparator = identical(),
+  default_comparator = cmp_identical(),
   keep_simsum = TRUE,
   deduplication = FALSE,
   add_xy = TRUE
@@ -25,6 +26,8 @@ pair_minsim(
 and \code{y} are compared.}
 
 \item{minsim}{minimal similarity score.}
+
+\item{on_blocking}{variables for which the pairs have to match.}
 
 \item{comparators}{named list of functions with which the variables are compared. 
 This function should accept two vectors. Function should either return a vector
@@ -68,6 +71,12 @@ data("linkexample1", "linkexample2")
 pairs <- pair_minsim(linkexample1, linkexample2, 
    on = c("postcode", "address"), minsim = 1)
 # Either address or postcode has to match to keep a pair
+
+data("linkexample1", "linkexample2")
+pairs <- pair_minsim(linkexample1, linkexample2, on_blocking = "postcode",
+   on = c("lastname", "firstname", "address"), minsim = 2)
+# Postcode has to match; from lastname, firstname, address there have to match
+# two or more (e.g. one mismatch is allowed).
 
 }
 \seealso{

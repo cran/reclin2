@@ -11,6 +11,9 @@
 #' object can be used as a regular (non-cluster) set of pairs
 #' 
 #' @examples
+#' # We don't test this example on CRAN as it generates issues with the 
+#' # runtime.
+#' \donttest{
 #' library(parallel)
 #' data("linkexample1", "linkexample2")
 #' cl <- makeCluster(2)
@@ -27,6 +30,7 @@
 #' local_pairs <- cluster_collect(pairs, "selected")
 #' 
 #' stopCluster(cl)
+#' }
 #' @importFrom parallel clusterCall
 #' @import data.table
 #' @export
@@ -58,7 +62,7 @@ cluster_collect <- function(pairs, select = NULL, clear = FALSE) {
   x <- rbindlist(x)
   # make sure x is put back in correct order
   x <- x[order(.id)]
-  attr(p, "x") <- x
+  setattr(p, "x", x)
   # Build a list of attributes we want to copy from the data.tables in tmp to 
   # the new pairs list
   attr_ignore <- c("x", "names", "row.names", "class")
@@ -67,9 +71,9 @@ cluster_collect <- function(pairs, select = NULL, clear = FALSE) {
   attr_names <- attr_names[!grepl("^\\.", attr_names)]
   # Copy/set attributes
   for (name in attr_names) {
-    attr(p, name) <- attr(tmp[[1]], name)
+    setattr(p, name, attr(tmp[[1]], name))
   }
-  class(p) <- c("pairs", class(p))
+  setattr(p, "class", c("pairs", class(p)))
   p
 }
 

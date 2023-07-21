@@ -30,7 +30,7 @@
 #' 
 #' @export
 compare_vars <- function(pairs, variable, on_x = variable, on_y = on_x, 
-    comparator = identical(), ...) {
+    comparator = cmp_identical(), ...) {
   UseMethod("compare_vars")
 }
 
@@ -38,16 +38,16 @@ compare_vars <- function(pairs, variable, on_x = variable, on_y = on_x,
 #' @rdname compare_vars
 #' @export
 compare_vars.pairs <- function(pairs, variable, on_x = variable, on_y = on_x, 
-    comparator = identical(), x = attr(pairs, 'x'), y = attr(pairs, 'y'), 
+    comparator = cmp_identical(), x = attr(pairs, 'x'), y = attr(pairs, 'y'), 
     inplace = FALSE, ...) {
   xv <- x[pairs$.x, ..on_x]
   yv <- y[pairs$.y, ..on_y]
   # Compare
   res <- if (ncol(xv) == 1 && ncol(yv) == 1) 
     comparator(xv[[1]], yv[[1]]) else comparator(xv, yv)
-  attr(res, "comparator") <- comparator
-  attr(res, "on_x") <- on_x
-  attr(res, "on_y") <- on_y
+  setattr(res, "comparator", comparator)
+  setattr(res, "on_x", on_x)
+  setattr(res, "on_y", on_y)
   # Assign result of comparison to pairs
   if (is.data.table(res) || is.data.frame(res)) {
     for (col in names(res)) {
