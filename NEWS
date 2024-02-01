@@ -1,4 +1,27 @@
 
+CHANGES IN VERSION 0.3.5
+
+NEW FEATURES
+ 
+  - Additional arguments to `compare_vars` are passed on to the comparison
+    function.
+
+  - Added `inplace` argument to `predict`.
+
+  - The `greedy` function is now exported.
+
+  - The `identical` function has been removed. It was already deprecated. The
+    identical `cmp_identical` can be used instead.
+
+BUG FIXES
+
+  - `identical` called itself resulting in a stack overflow. This has been
+    fixed.
+
+  - In extreme cases where the one of the m-probabilities converged to zero
+    `problink_em` gave an error. The algorithm will now converge to a small
+    value and give a warning (as this usually means that the algorithm didn't
+    converge to a valid solution.
 
 CHANGES IN VERSION 0.3.2
 

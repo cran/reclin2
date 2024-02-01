@@ -162,11 +162,9 @@ pairs <- select_greedy(pairs, "greedy", "mpost", 0.5)
 table(pairs$ntom, pairs$greedy)
 
 # The same example as above using a cluster;
-# We don't test this example on CRAN as it generates issues with the 
-# runtime.
-\donttest{
 library(parallel)
 cl <- makeCluster(2)
+\dontshow{clusterEvalQ(cl, data.table::setDTthreads(1))}
 pairs <- cluster_pair_blocking(cl, linkexample1, linkexample2, "postcode")
 compare_pairs(pairs, c("lastname", "firstname", "address", "sex"))
 model <- problink_em(~ lastname + firstname + address + sex, data = pairs)
@@ -179,7 +177,7 @@ local_pairs <- cluster_collect(pairs, "selected")
 local_pairs <- select_n_to_m(local_pairs, "ntom", "mpost", 0.5)
 local_pairs <- select_greedy(local_pairs, "greedy", "mpost", 0.5)
 table(local_pairs$ntom, local_pairs$greedy)
+
 stopCluster(cl)
-}
 
 }

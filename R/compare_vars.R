@@ -18,7 +18,7 @@
 #'   pairs is large this can be more efficient.
 #' @param new_name name of new object to assign the pairs to on the cluster
 #'   nodes.
-#' @param ... Used to pass additional arguments to methods
+#' @param ... Passed on to the comparator function.
 #'
 #' @details
 #' When \code{comparator} returns a \code{data.table} multiple columns are added to \code{pairs}. 
@@ -44,7 +44,7 @@ compare_vars.pairs <- function(pairs, variable, on_x = variable, on_y = on_x,
   yv <- y[pairs$.y, ..on_y]
   # Compare
   res <- if (ncol(xv) == 1 && ncol(yv) == 1) 
-    comparator(xv[[1]], yv[[1]]) else comparator(xv, yv)
+    comparator(xv[[1]], yv[[1]], ...) else comparator(xv, yv, ...)
   setattr(res, "comparator", comparator)
   setattr(res, "on_x", on_x)
   setattr(res, "on_y", on_y)

@@ -11,12 +11,10 @@
 #' object can be used as a regular (non-cluster) set of pairs
 #' 
 #' @examples
-#' # We don't test this example on CRAN as it generates issues with the 
-#' # runtime.
-#' \donttest{
 #' library(parallel)
 #' data("linkexample1", "linkexample2")
 #' cl <- makeCluster(2)
+#' \dontshow{clusterEvalQ(cl, data.table::setDTthreads(1))}
 #' 
 #' pairs <- cluster_pair(cl, linkexample1, linkexample2)
 #' local_pairs <- cluster_collect(pairs, clear = FALSE)
@@ -30,7 +28,6 @@
 #' local_pairs <- cluster_collect(pairs, "selected")
 #' 
 #' stopCluster(cl)
-#' }
 #' @importFrom parallel clusterCall
 #' @import data.table
 #' @export
