@@ -1,6 +1,6 @@
-fc9ae746e5cebbc1725ba7a76bbdf52a *DESCRIPTION
+778579bb423961a0186b84384bf4c357 *DESCRIPTION
 5f6ce9f00ccad59bc198af728b696940 *NAMESPACE
-4fc3de584410c54d5e78e44853bc65cd *NEWS
+b6cb4d8cb1d1ffcfe6afaa9d8e1002fd *NEWS
 c216a98e96c59b6d44f665d634cc2cea *R/RcppExports.R
 41d01a3134be78305019c4eca84d0eb4 *R/add_from_x.R
 8162d4b6a613e1963baac20daec283ec *R/cluster_call.R
@@ -66,7 +66,7 @@ e6ff77df68bb66b1cf16b3d46748ca44 *inst/doc/introduction.md
 ba3512b865784b51e784b36522f29669 *inst/doc/record_linkage_using_machine_learning.html
 08fc92105f51fdd1f4cc98869aaa5cf7 *inst/doc/record_linkage_using_machine_learning.md
 16bc2bbfde28286f697a2a1212003ffe *inst/doc/using_a_cluster_for_record_linkage.R
-0765c24dd3326603921e72357380e00d *inst/doc/using_a_cluster_for_record_linkage.html
+3dd365c6abfe1b5d48ffd7c56138c59b *inst/doc/using_a_cluster_for_record_linkage.html
 d7747ec391b55424ec69cf1bd0dd9e23 *inst/doc/using_a_cluster_for_record_linkage.md
 ab4d819ad3275810281596f0d85d1b71 *man/add_from_x.Rd
 c12178e2d17774aae367396f1cf42aaa *man/cluster_call.Rd
@@ -99,7 +99,7 @@ d077d13e353aa45643b68d2cb8b59e12 *man/pair_blocking.Rd
 6f8524fa09ba0ee8e22e1c8a1e64a876 *man/town_names.Rd
 9beb99b5c5e1ebe00e6b35e63f1f59d6 *src/RcppExports.cpp
 cd7f47b0cafa10293e2a4bf53849c915 *src/equivalence.cpp
-7a361fb91ccf7f077f831862ce65e205 *src/greedy.cpp
+be8e96ef6ce67bb9ce3ced7cfb73cd83 *src/greedy.cpp
 3849a9a81d0994210f71c39f75d63280 *tests/helpers.R
 26667b4b81730ff48df22e095f1e180b *tests/test_cluster_compare_vars.R
 62d91de6661666a49a935d8d2627f6f7 *tests/test_cluster_pair.R
@@ -107,7 +107,7 @@ cd7f47b0cafa10293e2a4bf53849c915 *src/equivalence.cpp
 8b0a69362fd52ef6a0b45a0f0d97c248 *tests/test_cluster_pair_minsim.R
 e1accf0f8655959ab06796e426b496d2 *tests/test_compare_vars.R
 ac3d59cb650b18721b0a89ce4d9a7404 *tests/test_distribute_over_cluster.R
-12a6d461c84f422b6eedad10a223be58 *tests/test_greedy.R
+3c057e6317637d3cdefd60e1b16fae06 *tests/test_greedy.R
 e9eb7ab9af9418595af9e3b5924af03e *tests/test_merge_pairs.R
 08d233a9d578dfa4592cbb59c67d46be *tests/test_pair.R
 000f1de5811270d152b4c6736997c1e7 *tests/test_pair_blocking.R

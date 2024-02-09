@@ -1,7 +1,7 @@
 Package: reclin2
 Type: Package
 Title: Record Linkage Toolkit
-Version: 0.4.0
+Version: 0.5.0
 Authors@R: 
     person(given = "Jan",
            family = "van der Laan",
@@ -29,8 +29,8 @@ LazyLoad: yes
 Encoding: UTF-8
 RoxygenNote: 7.2.3
 NeedsCompilation: yes
-Packaged: 2024-02-01 12:09:12 UTC; eoos
+Packaged: 2024-02-09 07:44:04 UTC; eoos
 Author: Jan van der Laan [aut, cre] (<https://orcid.org/0000-0002-0693-1514>)
 Maintainer: Jan van der Laan <r@eoos.dds.nl>
 Repository: CRAN
-Date/Publication: 2024-02-01 12:50:02 UTC
+Date/Publication: 2024-02-09 08:30:02 UTC
